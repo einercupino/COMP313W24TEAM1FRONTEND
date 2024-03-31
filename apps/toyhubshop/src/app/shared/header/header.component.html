@@ -1,1 +1,24 @@
-<p>header works!</p>
+<header>
+    <div class="p-grid">
+        <div class="p-col-3">
+            <div class="logo">
+                <img src="../../../assets/images/logo.png" alt="logo">
+            </div>
+        </div>
+        <div class="p-col-4 search">
+            <products-search></products-search>
+        </div>
+        <div class="p-col-3 p-offset-1 navigation">
+            <toyhub-nav>
+
+            </toyhub-nav>
+        </div>
+        <div class="p-col-1 tools">
+            
+            <a [href]="userId ? '/history' : '/login'">
+                <i class="pi pi-user"></i>
+            </a>
+            <orders-cart-icon></orders-cart-icon>
+        </div>
+    </div>
+</header>

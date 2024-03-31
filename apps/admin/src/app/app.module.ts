@@ -16,6 +16,8 @@ import { CategoriesFormsComponent } from './pages/categories/categories-forms/ca
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 import { AuthGuard, JwtInterceptor, UsersModule } from '@toys-hub/users';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -62,7 +64,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {
-                path: 'dashboard',
+                path: '',
                 component: DashboardComponent
             },
             {
@@ -111,6 +113,11 @@ const routes: Routes = [
             }
 
         ]
+    },
+    {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
     }
 ];
 
@@ -133,6 +140,8 @@ const routes: Routes = [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
