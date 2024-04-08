@@ -32,6 +32,10 @@ const routes: Routes = [
         component: ProductsListComponent
     },
     {
+        path: 'products/:productname',
+        component: ProductsListComponent
+    },
+    {
         path: 'products/:productid',
         component: ProductPageComponent
     },
