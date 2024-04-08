@@ -15,18 +15,35 @@ export class ProductsListComponent implements OnInit {
     categories: Category[] = [];
     isCategoryPage: boolean;
 
-    constructor(private prodService: ProductsService, private catService: CategoriesService, private route: ActivatedRoute) {}
+    constructor(private prodService: ProductsService, private catService: CategoriesService, public route: ActivatedRoute) {}
 
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
-            params.categoryid ? this._getProducts([params.categoryid]) : this._getProducts();
-            params.categoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
+            // params.categoryid ? this._getProducts([params.categoryid]) : this._getProducts();
+            // params.categoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
+            // params.productname ? this._getProductsByName(params.productname) : this._getProducts();  
+            if (params.categoryid) {
+                this._getProducts([params.categoryid])
+                this.isCategoryPage = true
+            } else if (params.productname) {
+                this._getProductsByName(params.productname)
+            } else {
+                this._getProducts();
+            }
+
+            this.isCategoryPage = false
         });
         this._getCategories();
     }
 
     private _getProducts(categoriesFilter?: string[]) {
         this.prodService.getProducts(categoriesFilter).subscribe((resProducts) => {
+            this.products = resProducts;
+        });
+    }
+
+    private _getProductsByName(productName: string) {
+        this.prodService.searchProducts(productName).subscribe((resProducts) => {
             this.products = resProducts;
         });
     }

@@ -21,6 +21,10 @@ export class ProductsService {
         return this.http.get<Product[]>(this.apiURLProducts, { params: params });
     }
 
+    searchProducts(keyword: string): Observable<Product[]> {
+        return this.http.get<Product[]>(`${this.apiURLProducts}/search/${keyword}`);
+    }
+
     createProduct(productData: FormData): Observable<Product> {
         return this.http.post<Product>(this.apiURLProducts, productData);
     }
