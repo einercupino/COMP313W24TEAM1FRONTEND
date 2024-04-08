@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'products-search',
@@ -7,19 +6,7 @@ import { Router } from '@angular/router';
     styles: []
 })
 export class ProductsSearchComponent implements OnInit {
-    constructor(private router: Router) {}
+    constructor() {}
 
-    ngOnInit(): void {
-        // clear search input
-        const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-        searchInput.value = '';
-    }
-
-    searchProducts(event: any) {
-        const keyword = event.target.value;
-        // debounce search
-        setTimeout(() => {
-            this.router.navigateByUrl(`/products/${keyword}`);
-        }, 1000);
-    }
+    ngOnInit(): void {}
 }
